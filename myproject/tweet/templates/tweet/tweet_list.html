@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Chai aur Tweet - Index Page
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center  mt-4">Welcome to the Index Page</h1>
+<p>This is the main content of the index page.</p>
+
+<a class="btn btn-primary mb-4" href="{% url 'tweet_create' %}">create a tweet </a>
+<div class="container row gap-3">
+    {% for tweet in tweets %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{tweet.photo.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{tweet.user.username}}</h5>
+          <p class="card-text">{{tweet.text}}</p>
+          {% if tweet.user == user %}
+          <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit Tweet</a>
+          <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+
+    {% endfor %}
+</div>
+{% endblock %}
